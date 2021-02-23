@@ -1,16 +1,30 @@
 .users {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
 
     &__button {
+        width: 220px;
+        height: 40px;
+        font-size: 14px;
+        color: black;
+        background-color: grey;
+        border-radius: 8px;
+        border: none;
         margin-bottom: 32px;
     }
 
     &__table {
+        width: 100%;
         border: 1px solid red;
         border-spacing: 0;
+        color: black;
+
+        @media (min-width: 900px) {
+            width: 800px;
+        }
     }
 
     &__row {

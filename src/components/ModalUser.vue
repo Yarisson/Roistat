@@ -4,7 +4,7 @@
             <h1 class="modal-user__title">Добавить пользователя</h1>
             <button class="modal-user__button-close" @click="modalClose"></button>
             <div class="modal-user__input-field">
-                <label for="name">Имя</label>
+                <label class="modal-user__label" for="name">Имя</label>
                 <input
                     id="name"
                     type="text"
@@ -16,25 +16,50 @@
                 </span>
             </div>
             <div class="modal-user__input-field">
-                <label for="phone">Телефон</label>
-                <template> <vue-tel-input id="phone" v-model="phone"></vue-tel-input>  </template>
-                <!-- <input
-                    id="phone"
-                    type="phone"
-                    v-model="phone"
-                > -->
-                <!-- <input id="phone" type="tel" placeholder="+380____________" v-model="phone" required pattern="+[0-9()-.^+\/*%^]"> -->
-                <span
-                      class="modal-user__helper-text invalid">Введите корректный номер мобильного телефона
-                </span>
+                <template>
+                    <label class="modal-user__label" for="phone">Телефон</label>
+                    <vue-tel-input id="phone" v-model="phone"
+                                   :preferred-countries="['ru', 'bl', 'by', 'fr', 'gr', 'it', 'gb', 'uk', 'ua', 'us']"
+                                   :valid-characters-only="true"
+                                   select-label="Code"
+                                   @input="onInput">
+                    </vue-tel-input>
+                    <div class="modal-user__phone-info">
+                        <div v-if="tel.number" style="color: #e83e8c">
+                            <span>
+                                Номер:
+                                <strong>{{ tel.number }}</strong
+                                >,&nbsp;
+                            </span>
+                            <span>
+                                Корректность:
+                                <strong>{{ tel.valid }}</strong
+                                >,&nbsp;
+                            </span>
+                            <span>
+                                Страна:
+                                <strong>{{ tel.country }}</strong>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-user__phone-info">
+                        <v-row justify="start">
+                            <v-col cols="6">
+                                <v-btn @click="phone = '+7 916 703 4643'">Добавьте номер</v-btn>
+                            </v-col>
+                        </v-row>
+                    </div> 
+                </template>
+
             </div>
             <div class="modal-user__input-field" v-if="allUsers.length > 0">
-                <span>Имя Начальника:</span>
-                <select v-model="chief"
-                        v-for="user of allUsers"
-                        :key="user">
+                <span class="modal-user__label">Имя Начальника:</span>
+                <select v-model="chief">
                     <option value="chief">Выберите один из вариантов</option>
-                    <option>{{user.name}}</option>
+                    <option v-for="user of allUsers"
+                            :key="user">
+                            {{user.name}}
+                    </option>
                 </select>
             </div>
 
@@ -57,7 +82,12 @@ export default {
             type: Number,
             default: 1,
         },
-        chief: ''
+        chief: '',
+        tel: {
+        number: '',
+        valid: false,
+        country: undefined,
+        },
     }),
     computed: mapGetters(["allUsers"]),
     validations: {
@@ -84,7 +114,12 @@ export default {
             this.phone = 1;
             this.chief = '';
             this.$emit('modalClose');
-        },     
+        },
+        onInput(formattedNumber, { number, valid, country }) {
+            this.tel.number = number.international;
+            this.tel.valid = valid;
+            this.tel.country = country && country.name;
+        },
     },
 }
 </script>

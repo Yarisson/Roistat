@@ -17,7 +17,6 @@ export default new Vuex.Store({
   },
   actions: {
     async fetchUsers({commit}, users) {
-
       commit('updateUsers', users)
     },
   },
