@@ -1,0 +1,73 @@
+.modal-user {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    &__form {
+        width: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    &__button-close {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        background-color: cornflowerblue;
+        border-radius: 8px;
+        border: none;
+
+        &::before {
+            display: block;
+            content: '';
+            position: absolute;
+            top: calc(50% - 8px);
+            left: calc(50% - 1px);
+            width: 2px;
+            height: 16px;
+            transform: rotate(45deg);
+            background-color: black;
+        }
+
+        &::after {
+            display: block;
+            content: '';
+            position: absolute;
+            top: calc(50% - 8px);
+            left: calc(50% - 1px);
+            width: 2px;
+            height: 16px;
+            transform: rotate(-45deg);
+            background-color: black;
+        }
+    }
+
+    &__input-field {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin: 16px 0;
+    }
+
+    &__helper-text {
+        width: 100%;
+        text-align: left;
+        color: red;
+    }
+
+    &__button {
+        width: 220px;
+        height: 40px;
+        font-size: 14px;
+        color: black;
+        background-color: grey;
+        border-radius: 8px;
+        border: none;
+    }
+}

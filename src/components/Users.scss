@@ -1,0 +1,27 @@
+.users {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    &__button {
+        margin-bottom: 32px;
+    }
+
+    &__table {
+        border: 1px solid red;
+        border-spacing: 0;
+    }
+
+    &__row {
+        border: 1px solid red;
+    }
+
+    &__head {
+        border: 1px solid red;
+    }
+
+    &__cell {
+        border: 1px solid red;
+    }
+}
