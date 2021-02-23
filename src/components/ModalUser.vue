@@ -48,7 +48,6 @@ import { VueTelInput } from 'vue-tel-input';
 import { mapMutations, mapGetters, mapActions } from "vuex";
 
 export default {
-    props: [ 'modalOpen' ],
     components: {
         VueTelInput,
     },
@@ -66,7 +65,7 @@ export default {
     },
     methods: {
         modalClose() {
-            this.$emit('modalClose', this.modalOpen)
+            this.$emit('modalClose');
         },
         ...mapMutations(["addUser"]),
         submitHandler() {
@@ -84,7 +83,7 @@ export default {
             this.name = '';
             this.phone = 1;
             this.chief = '';
-            this.$emit('modalClose', this.modalOpen)
+            this.$emit('modalClose');
         },     
     },
 }

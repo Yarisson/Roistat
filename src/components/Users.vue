@@ -30,7 +30,6 @@
       </table>
 
     <ModalUser v-if="modalOpen"
-               :modalOpen="modalOpen"
                @modalClose="modalCloseHandler" />
 
   </div>
