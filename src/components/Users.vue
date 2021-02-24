@@ -4,10 +4,10 @@
 
     <table class="users__table">
       <tr class="users__row">
-        <th class="users__head">имя</th>
-        <th class="users__head">телефон</th>
+        <th @click="sortByName" class="users__head">имя</th>
+        <th @click="sortByPhone" class="users__head">телефон</th>
       </tr>
-      <tr v-for="user of allUsers" :key="user" class="users__row">
+      <tr v-for="user of receivedUsers" :key="user" class="users__row">
         <th class="users__head">{{ user.name }}</th>
         <th class="users__head">{{ user.phone }}</th>
       </tr>
@@ -15,7 +15,7 @@
 
     <ModalUser
       v-if="modalOpen"
-      :userList="allUsers"
+      :userList="receivedUsers"
       @modalClose="modalCloseHandler"
     />
   </div>
@@ -29,6 +29,7 @@ export default {
   name: "Users",
   data: () => ({
     modalOpen: false,
+    receivedUsers: [],
   }),
   computed: mapGetters(["allUsers"]),
   components: {
@@ -43,6 +44,12 @@ export default {
     modalCloseHandler() {
       this.modalOpen = false;
     },
+    sortByName() {
+      return this.receivedUsers.sort( (a,b) => a.name.localeCompare(b.name));
+    },
+    sortByPhone() {
+      return this.receivedUsers.sort( (a,b) => String(a.phone).localeCompare(String(b.phone)));
+    },
   },
   async mounted() {
     if (localStorage.getItem("users")) {
@@ -51,6 +58,9 @@ export default {
         localUsers = JSON.parse(localStorage.getItem("users"));
         await this.$store.dispatch("fetchUsers", localUsers);
       } catch (e) {}
+
+      this.receivedUsers = this.$store.getters.allUsers;
+      console.log(this.receivedUsers);
     }
   },
 };

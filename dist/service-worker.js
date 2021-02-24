@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/roistat/precache-manifest.b961845c1a3ebf6ee8545d465b5aba6f.js"
+  "/roistat/precache-manifest.82941949d045c806745ae8aaca8fdf66.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "roistat"});

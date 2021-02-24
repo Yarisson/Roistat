@@ -9,20 +9,20 @@ export default new Vuex.Store({
   },
   mutations: {
     addUser(state, user) {
-      state.users.push(user)
+      state.users.push(user);
     },
     updateUsers(state, newUsers) {
-      state.users = newUsers
+      state.users = newUsers;
     },
   },
   actions: {
     async fetchUsers({commit}, users) {
-      commit('updateUsers', users)
+      commit('updateUsers', users);
     },
   },
   getters: {
     allUsers(state) {
-      return state.users
+      return state.users;
     },
   },
   modules: {
